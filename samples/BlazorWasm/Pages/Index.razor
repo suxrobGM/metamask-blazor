@@ -2,6 +2,11 @@
 
 <h1>MetaMask Blazor Sample App</h1>
 
+@if (!string.IsNullOrEmpty(Error))
+{
+    <p class="text-danger">@Error</p>
+}
+
 @if (!HasMetaMask)
 {
     <p>No MetaMask detected. Please install <a href="https://metamask.io" target="_blank">MetaMask</a>.</p>
