@@ -1,0 +1,43 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31808.319
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ethereum.MetaMask.Blazor", "src\Ethereum.MetaMask.Blazor\Ethereum.MetaMask.Blazor.csproj", "{66BFAA29-18FC-4FB3-BEAE-B1BC5B9B25EA}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlazorWasm", "samples\BlazorWasm\BlazorWasm.csproj", "{D78A61EA-30FF-456A-BBE2-92C0D8C4C320}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Samples", "Samples", "{5928DE1C-4BEC-4A38-AB03-240730ECAAC9}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlazorServer", "samples\BlazorServer\BlazorServer.csproj", "{6EB78D1E-260F-46FA-B113-E9974FF69E3E}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{66BFAA29-18FC-4FB3-BEAE-B1BC5B9B25EA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{66BFAA29-18FC-4FB3-BEAE-B1BC5B9B25EA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{66BFAA29-18FC-4FB3-BEAE-B1BC5B9B25EA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{66BFAA29-18FC-4FB3-BEAE-B1BC5B9B25EA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D78A61EA-30FF-456A-BBE2-92C0D8C4C320}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D78A61EA-30FF-456A-BBE2-92C0D8C4C320}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D78A61EA-30FF-456A-BBE2-92C0D8C4C320}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D78A61EA-30FF-456A-BBE2-92C0D8C4C320}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6EB78D1E-260F-46FA-B113-E9974FF69E3E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6EB78D1E-260F-46FA-B113-E9974FF69E3E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6EB78D1E-260F-46FA-B113-E9974FF69E3E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6EB78D1E-260F-46FA-B113-E9974FF69E3E}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{D78A61EA-30FF-456A-BBE2-92C0D8C4C320} = {5928DE1C-4BEC-4A38-AB03-240730ECAAC9}
+		{6EB78D1E-260F-46FA-B113-E9974FF69E3E} = {5928DE1C-4BEC-4A38-AB03-240730ECAAC9}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {50B8AE03-D5FC-4A4D-A8AF-6BF640B1E6E2}
+	EndGlobalSection
+EndGlobal

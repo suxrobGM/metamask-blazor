@@ -1,0 +1,31 @@
+﻿@page "/"
+
+<h1>MetaMask Blazor Sample App</h1>
+
+@if (!HasMetaMask)
+{
+    <p>No MetaMask detected. Please install <a href="https://metamask.io" target="_blank">MetaMask</a>.</p>
+}
+else if (string.IsNullOrEmpty(SelectedAccount))
+{
+    <button class="btn btn-primary" @onclick="ConnectMetaMask">Enable Ethereum</button>
+    <br />
+    <br />
+}
+else
+{
+    <button class="btn btn-primary" @onclick="GetSelectedAddress">Get Selected Address</button>
+    <br />
+    <p>@SelectedAccount</p>
+    <br />
+
+    <button class="btn btn-primary" @onclick="GetSelectedNetwork">Get Selected Chain</button>
+    <br />
+    <p>@SelectedChain</p>
+    <br />
+
+    <button class="btn btn-primary" @onclick="GenericRpc">Generic RPC call examle</button>
+    <br />
+    <p>@RpcResult</p>
+    <br />
+}
