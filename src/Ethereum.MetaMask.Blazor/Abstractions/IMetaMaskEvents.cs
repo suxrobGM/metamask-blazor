@@ -11,28 +11,28 @@ public interface IMetaMaskEvents
     /// <summary>
     /// Event when user changes account.
     /// </summary>
-    event EventHandler<string[]> AccountsChanged;
+    event EventHandler<string[]>? AccountsChanged;
 
     /// <summary>
     /// Event when user changes chain.
     /// </summary>
-    event EventHandler<string> ChainChanged;
+    event EventHandler<string>? ChainChanged;
 
     /// <summary>
     /// Event when it receives some message that the consumer should be notified of.
     /// The kind of message is identified by the type string.
     /// </summary>
-    event EventHandler<ProviderMessage> Message;
+    event EventHandler<ProviderMessage>? MessageReceived;
 
     /// <summary>
     /// Event when user connects to MetaMask.
     /// </summary>
-    event EventHandler<ConnectInfo> Connect;
+    event EventHandler<ConnectInfo>? Connect;
 
     /// <summary>
     /// Event when user disconnects from MetaMask.
     /// </summary>
-    event EventHandler<ProviderRpcError> Disconnect;
+    event EventHandler<ProviderRpcError>? Disconnect;
 
     /// <summary>
     /// Raises <see cref="AccountsChanged"/> event.
@@ -47,10 +47,10 @@ public interface IMetaMaskEvents
     void OnChainChanged(string chainId);
 
     /// <summary>
-    /// Raises <see cref="Message"/> event.
+    /// Raises <see cref="MessageReceived"/> event.
     /// </summary>
     /// <param name="message">Provider message.</param>
-    void OnMessage(ProviderMessage message);
+    void OnMessageReceived(ProviderMessage message);
 
     /// <summary>
     /// Raises <see cref="Connect"/> event.

@@ -19,7 +19,7 @@
             Event when user changes chain.
             </summary>
         </member>
-        <member name="E:Ethereum.MetaMask.Blazor.IMetaMaskEvents.Message">
+        <member name="E:Ethereum.MetaMask.Blazor.IMetaMaskEvents.MessageReceived">
             <summary>
             Event when it receives some message that the consumer should be notified of.
             The kind of message is identified by the type string.
@@ -27,12 +27,12 @@
         </member>
         <member name="E:Ethereum.MetaMask.Blazor.IMetaMaskEvents.Connect">
             <summary>
-            Event when connecting to MetaMask.
+            Event when user connects to MetaMask.
             </summary>
         </member>
         <member name="E:Ethereum.MetaMask.Blazor.IMetaMaskEvents.Disconnect">
             <summary>
-            Event when disconnecting from MetaMask.
+            Event when user disconnects from MetaMask.
             </summary>
         </member>
         <member name="M:Ethereum.MetaMask.Blazor.IMetaMaskEvents.OnAccountsChanged(System.String[])">
@@ -47,9 +47,9 @@
             </summary>
             <param name="chainId">Current chain ID</param>
         </member>
-        <member name="M:Ethereum.MetaMask.Blazor.IMetaMaskEvents.OnMessage(Ethereum.MetaMask.Blazor.Models.ProviderMessage)">
+        <member name="M:Ethereum.MetaMask.Blazor.IMetaMaskEvents.OnMessageReceived(Ethereum.MetaMask.Blazor.Models.ProviderMessage)">
             <summary>
-            Raises <see cref="E:Ethereum.MetaMask.Blazor.IMetaMaskEvents.Message"/> event.
+            Raises <see cref="E:Ethereum.MetaMask.Blazor.IMetaMaskEvents.MessageReceived"/> event.
             </summary>
             <param name="message">Provider message.</param>
         </member>
@@ -86,58 +86,66 @@
             <summary>
             Connects to the wallet.
             </summary>
+            <exception cref="T:Ethereum.MetaMask.Blazor.Exceptions.MetaMaskException">Throws MetaMaskException if something went wrong.</exception>
             <returns>Account number in hexadecimal format.</returns>
         </member>
         <member name="M:Ethereum.MetaMask.Blazor.IMetaMaskService.ChangeAccountAsync">
             <summary>
             Requests to change account
             </summary>
+            <exception cref="T:Ethereum.MetaMask.Blazor.Exceptions.MetaMaskException">Throws MetaMaskException if something went wrong.</exception>
             <returns>Account number in hexadecimal format.</returns>
         </member>
         <member name="M:Ethereum.MetaMask.Blazor.IMetaMaskService.GetSelectedAccountAsync">
             <summary>
             Gets current selected address.
             </summary>
+            <exception cref="T:Ethereum.MetaMask.Blazor.Exceptions.MetaMaskException">Throws MetaMaskException if something went wrong.</exception>
             <returns>Account number in hexadecimal format.</returns>
         </member>
         <member name="M:Ethereum.MetaMask.Blazor.IMetaMaskService.GetSelectedChainAsync">
             <summary>
             Gets current selected chain.
             </summary>
+            <exception cref="T:Ethereum.MetaMask.Blazor.Exceptions.MetaMaskException">Throws MetaMaskException if something went wrong.</exception>
             <returns>Chain number in hexadecimal format.</returns>
         </member>
         <member name="M:Ethereum.MetaMask.Blazor.IMetaMaskService.GetBalanceAsync(System.String)">
             <summary>
-            Gets balance of the account of given address.
+            Gets balance of the account of the given address.
             </summary>
             <param name="address">Address in hexadecimal format.
             The default value (null) is currently selected address.</param>
+            <exception cref="T:Ethereum.MetaMask.Blazor.Exceptions.MetaMaskException">Throws MetaMaskException if something went wrong.</exception>
             <returns>Integer of the current balance in wei.</returns>
         </member>
-        <member name="M:Ethereum.MetaMask.Blazor.IMetaMaskService.GetTokenBalance(System.String,System.String)">
+        <member name="M:Ethereum.MetaMask.Blazor.IMetaMaskService.GetTokenBalanceAsync(System.String,System.String)">
             <summary>
             Gets balance of the custom token.
             </summary>
             <param name="tokenAddress">Token or contract address.</param>
             <param name="account">Wallet address.
                 Default value is currently selected address in MetaMask.</param>
+            <exception cref="T:Ethereum.MetaMask.Blazor.Exceptions.MetaMaskException">Throws MetaMaskException if something went wrong.</exception>
             <returns>Integer of the token balance in wei.</returns>
         </member>
         <member name="M:Ethereum.MetaMask.Blazor.IMetaMaskService.SendTransactionAsync(System.String,System.Numerics.BigInteger,System.String)">
             <summary>
-            Creates new message call transaction or a contract creation, if the data field contains code.
+            Creates a new message call transaction or a contract creation, if the data field contains code.
             </summary>
             <param name="to">Receiver account number in hexadecimal format.</param>
             <param name="value">Integer of the value sent with this transaction.</param>
             <param name="data">The compiled code of a contract OR the hash of the invoked method signature and encoded parameters.</param>
+            <exception cref="T:Ethereum.MetaMask.Blazor.Exceptions.MetaMaskException">Throws MetaMaskException if something went wrong.</exception>
             <returns>Transaction hash in hexadecimal format.</returns>
         </member>
         <member name="M:Ethereum.MetaMask.Blazor.IMetaMaskService.RequestRpcAsync(System.String,System.Object[])">
             <summary>
-            Make generic ethereum RPC request. See available methods https://eth.wiki/json-rpc/API
+            Make a generic ethereum RPC request. See available methods https://eth.wiki/json-rpc/API
             </summary>
             <param name="method">RPC method name.</param>
             <param name="args">Parameters.</param>
+            <exception cref="T:Ethereum.MetaMask.Blazor.Exceptions.MetaMaskException">Throws MetaMaskException if something went wrong.</exception>
             <returns>Ethereum RPC response message.</returns>
         </member>
         <member name="M:Ethereum.MetaMask.Blazor.NumericExtensions.ToHexString(System.Int32)">

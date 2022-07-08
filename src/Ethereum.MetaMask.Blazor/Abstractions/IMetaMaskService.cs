@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Numerics;
 using System.Threading.Tasks;
+using Ethereum.MetaMask.Blazor.Exceptions;
 
 namespace Ethereum.MetaMask.Blazor;
 
@@ -24,24 +25,28 @@ public interface IMetaMaskService : IMetaMaskEvents, IAsyncDisposable
     /// <summary>
     /// Connects to the wallet.
     /// </summary>
+    /// <exception cref="MetaMaskException">Throws MetaMaskException if something went wrong.</exception>
     /// <returns>Account number in hexadecimal format.</returns>
     ValueTask<string> ConnectAsync();
-    
+
     /// <summary>
     /// Requests to change account
     /// </summary>
+    /// <exception cref="MetaMaskException">Throws MetaMaskException if something went wrong.</exception>
     /// <returns>Account number in hexadecimal format.</returns>
     ValueTask<string> ChangeAccountAsync();
 
     /// <summary>
     /// Gets current selected address.
     /// </summary>
+    /// <exception cref="MetaMaskException">Throws MetaMaskException if something went wrong.</exception>
     /// <returns>Account number in hexadecimal format.</returns>
     ValueTask<string> GetSelectedAccountAsync();
 
     /// <summary>
     /// Gets current selected chain.
     /// </summary>
+    /// <exception cref="MetaMaskException">Throws MetaMaskException if something went wrong.</exception>
     /// <returns>Chain number in hexadecimal format.</returns>
     ValueTask<string> GetSelectedChainAsync();
 
@@ -50,8 +55,9 @@ public interface IMetaMaskService : IMetaMaskEvents, IAsyncDisposable
     /// </summary>
     /// <param name="address">Address in hexadecimal format.
     /// The default value (null) is currently selected address.</param>
+    /// <exception cref="MetaMaskException">Throws MetaMaskException if something went wrong.</exception>
     /// <returns>Integer of the current balance in wei.</returns>
-    ValueTask<BigInteger> GetBalanceAsync(string address = null);
+    ValueTask<BigInteger> GetBalanceAsync(string address = "");
 
     /// <summary>
     /// Gets balance of the custom token.
@@ -59,8 +65,9 @@ public interface IMetaMaskService : IMetaMaskEvents, IAsyncDisposable
     /// <param name="tokenAddress">Token or contract address.</param>
     /// <param name="account">Wallet address.
     ///     Default value is currently selected address in MetaMask.</param>
+    /// <exception cref="MetaMaskException">Throws MetaMaskException if something went wrong.</exception>
     /// <returns>Integer of the token balance in wei.</returns>
-    ValueTask<BigInteger> GetTokenBalanceAsync(string tokenAddress, string account = null);
+    ValueTask<BigInteger> GetTokenBalanceAsync(string tokenAddress, string account = "");
 
     /// <summary>
     /// Creates a new message call transaction or a contract creation, if the data field contains code.
@@ -68,6 +75,7 @@ public interface IMetaMaskService : IMetaMaskEvents, IAsyncDisposable
     /// <param name="to">Receiver account number in hexadecimal format.</param>
     /// <param name="value">Integer of the value sent with this transaction.</param>
     /// <param name="data">The compiled code of a contract OR the hash of the invoked method signature and encoded parameters.</param>
+    /// <exception cref="MetaMaskException">Throws MetaMaskException if something went wrong.</exception>
     /// <returns>Transaction hash in hexadecimal format.</returns>
     ValueTask<string> SendTransactionAsync(string to, BigInteger value, string data);
 
@@ -76,6 +84,7 @@ public interface IMetaMaskService : IMetaMaskEvents, IAsyncDisposable
     /// </summary>
     /// <param name="method">RPC method name.</param>
     /// <param name="args">Parameters.</param>
+    /// <exception cref="MetaMaskException">Throws MetaMaskException if something went wrong.</exception>
     /// <returns>Ethereum RPC response message.</returns>
     ValueTask<dynamic> RequestRpcAsync(string method, params object[] args);
 }

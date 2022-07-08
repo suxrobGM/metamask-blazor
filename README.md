@@ -1,5 +1,5 @@
 # Ethereum.MetaMask.Blazor
-Interop library for simplifying MetaMask's API for Blazor WebAssembly and Server apps.
+Interop library for simplifying MetaMask's API for Blazor WebAssembly and Server-Side applications.
 
 ## Getting Started
 Register MetaMask service in `IServiceCollection` container.
@@ -38,6 +38,7 @@ Do not call interop methods in `OnInitialized` when using Blazor server pre-rend
 ## Events
 - `AccountsChanged` - Raises when user changes account.
 - `ChainChanged` - Raises when user changes chain.
+- `MessageReceived` - Raises when user receives some message that the consumer should be notified of.
 - `Connect` - Raises when user connects to MetaMask.
 - `Disconnect` - Raises when user disconnects from MetaMask.
 

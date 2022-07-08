@@ -1,33 +1,32 @@
 ﻿using System;
 using System.Numerics;
 using System.Threading.Tasks;
-using Microsoft.Extensions.Logging;
 using Microsoft.JSInterop;
 using Ethereum.MetaMask.Blazor.Models;
+using Ethereum.MetaMask.Blazor.Exceptions;
 
 namespace Ethereum.MetaMask.Blazor;
 
-public class MetaMaskService : IMetaMaskService
+internal class MetaMaskService : IMetaMaskService
 {
     private readonly Lazy<Task<IJSObjectReference>> _jsModule;
-    private readonly ILogger<MetaMaskService> _logger;
-    private DotNetObjectReference<MetaMaskService> _dotNetObjRef;
+
+    private DotNetObjectReference<MetaMaskService>? _dotNetObjRef;
     private bool _createdJsObj;
     private bool _eventsBound;
 
-    public event EventHandler<string[]> AccountsChanged;
-    public event EventHandler<string> ChainChanged;
-    public event EventHandler<ProviderMessage> Message;
-    public event EventHandler<ConnectInfo> Connect;
-    public event EventHandler<ProviderRpcError> Disconnect;
+    public event EventHandler<string[]>? AccountsChanged;
+    public event EventHandler<string>? ChainChanged;
+    public event EventHandler<ProviderMessage>? MessageReceived;
+    public event EventHandler<ConnectInfo>? Connect;
+    public event EventHandler<ProviderRpcError>? Disconnect;
 
-    public MetaMaskService(IJSRuntime jsRuntime, ILogger<MetaMaskService> logger = null!)
+    public MetaMaskService(IJSRuntime jsRuntime)
     {
         if (jsRuntime is null)
             throw new ArgumentNullException(nameof(jsRuntime));
 
         _jsModule = new Lazy<Task<IJSObjectReference>>(() => LoadScripts(jsRuntime).AsTask());
-        _logger = logger;
     }
 
     #region Internal methods
@@ -58,7 +57,7 @@ public class MetaMaskService : IMetaMaskService
         }
         catch (Exception ex)
         {
-            _logger?.LogError("Thrown exception in MetaMaskService.CreateMetaMaskJsObj(): {Exception}", ex);
+            throw new MetaMaskException("Could not initialize MetaMaskService", ex);
         }
     }
 
@@ -75,7 +74,7 @@ public class MetaMaskService : IMetaMaskService
         }
         catch (Exception ex)
         {
-            _logger?.LogError("Thrown exception in MetaMaskService.SetDotNetObjRef(): {Exception}", ex);
+            throw new MetaMaskException("Could not initialize MetaMaskService", ex);
         }
     }
 
@@ -92,13 +91,13 @@ public class MetaMaskService : IMetaMaskService
         }
         catch (Exception ex)
         {
-            _logger?.LogError("Thrown exception in MetaMaskService.BindEvents(): {Exception}", ex);
+            throw new MetaMaskException("Could not initialize MetaMaskService", ex);
         }
     }
 
     #endregion
 
-    #region Implementation of IMetaMaskService
+    #region Implementation of the IMetaMaskService
 
     public async ValueTask<bool> IsMetaMaskAvailableAsync()
     {
@@ -107,9 +106,8 @@ public class MetaMaskService : IMetaMaskService
         {
             return await module.InvokeAsync<bool>("isMetaMaskAvailable");
         }
-        catch (Exception ex)
+        catch (Exception)
         {
-            _logger?.LogError("Thrown exception in MetaMaskService.IsMetaMaskAvailableAsync(): {Exception}", ex);
             return false;
         }
     }
@@ -121,9 +119,8 @@ public class MetaMaskService : IMetaMaskService
         {
             return await module.InvokeAsync<bool>("isSiteConnected");
         }
-        catch (Exception ex)
+        catch (Exception)
         {
-            _logger?.LogError("Thrown exception in MetaMaskService.IsSiteConnectedAsync(): {Exception}", ex);
             return false;
         }
     }
@@ -138,8 +135,7 @@ public class MetaMaskService : IMetaMaskService
         }
         catch (Exception ex)
         {
-            _logger?.LogError("Thrown exception in MetaMaskService.ConnectAsync(): {Exception}", ex);
-            return string.Empty;
+            throw new MetaMaskException("Could not connect to the wallet", ex);
         }
     }
 
@@ -153,8 +149,7 @@ public class MetaMaskService : IMetaMaskService
         }
         catch (Exception ex)
         {
-            _logger?.LogError("Thrown exception in MetaMaskService.ChangeAccountAsync(): {Exception}", ex);
-            return string.Empty;
+            throw new MetaMaskException("Could not change the account", ex);
         }
     }
 
@@ -168,8 +163,7 @@ public class MetaMaskService : IMetaMaskService
         }
         catch (Exception ex)
         {
-            _logger?.LogError("Thrown exception in MetaMaskService.GetSelectedAccountAsync(): {Exception}", ex);
-            return string.Empty;
+            throw new MetaMaskException("Could not get an account address", ex);
         }
     }
 
@@ -183,12 +177,11 @@ public class MetaMaskService : IMetaMaskService
         }
         catch (Exception ex)
         {
-            _logger?.LogError("Thrown exception in MetaMaskService.GetSelectedChainAsync(): {Exception}", ex);
-            return string.Empty;
+            throw new MetaMaskException("Could not get a chain address", ex);
         }
     }
 
-    public async ValueTask<BigInteger> GetBalanceAsync(string address = null)
+    public async ValueTask<BigInteger> GetBalanceAsync(string address = "")
     {
         var module = await _jsModule.Value;
         try
@@ -199,12 +192,11 @@ public class MetaMaskService : IMetaMaskService
         }
         catch (Exception ex)
         {
-            _logger?.LogError("Thrown exception in MetaMaskService.GetBalanceAsync(): {Exception}", ex);
-            return BigInteger.Zero;
+            throw new MetaMaskException("Could not get an account balance", ex);
         }
     }
 
-    public async ValueTask<BigInteger> GetTokenBalanceAsync(string tokenAddress, string account = null)
+    public async ValueTask<BigInteger> GetTokenBalanceAsync(string tokenAddress, string account = "")
     {
         var module = await _jsModule.Value;
         try
@@ -215,8 +207,7 @@ public class MetaMaskService : IMetaMaskService
         }
         catch (Exception ex)
         {
-            _logger?.LogError("Thrown exception in MetaMaskService.GetTokenBalance(): {Exception}", ex);
-            return BigInteger.Zero;
+            throw new MetaMaskException("Could not get a token balance", ex);
         }
     }
 
@@ -230,8 +221,7 @@ public class MetaMaskService : IMetaMaskService
         }
         catch (Exception ex)
         {
-            _logger?.LogError("Thrown exception in MetaMaskService.SendTransactionAsync(): {Exception}", ex);
-            return string.Empty;
+            throw new MetaMaskException("Could not send transaction to specified address", ex);
         }
     }
 
@@ -245,8 +235,7 @@ public class MetaMaskService : IMetaMaskService
         }
         catch (Exception ex)
         {
-            _logger?.LogError("Thrown exception in MetaMaskService.RequestRpcAsync(): {Exception}", ex);
-            return null;
+            throw new MetaMaskException("Could not make an RPC request", ex);
         }
     }
 
@@ -277,9 +266,9 @@ public class MetaMaskService : IMetaMaskService
     }
 
     [JSInvokable]
-    public void OnMessage(ProviderMessage providerMessage)
+    public void OnMessageReceived(ProviderMessage providerMessage)
     {
-        Message?.Invoke(this, providerMessage);
+        MessageReceived?.Invoke(this, providerMessage);
     }
 
     [JSInvokable]

@@ -78,7 +78,7 @@ export class MetaMaskService {
             });
 
             ethereum.on("message", async providerMessage => {
-                await DotNetReference.invokeMethodAsync("OnMessage", providerMessage);
+                await DotNetReference.invokeMethodAsync("OnMessageReceived", providerMessage);
             });
 
             ethereum.on("chainChanged", async chainId => {

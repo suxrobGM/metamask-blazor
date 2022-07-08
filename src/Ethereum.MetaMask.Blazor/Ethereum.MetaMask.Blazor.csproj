@@ -4,16 +4,21 @@
     <IsPackable>true</IsPackable>
     <TargetFramework>net6.0</TargetFramework>
     <NoWarn>$(NoWarn);1591</NoWarn>
+	<Version>1.0.0</Version>
     <DocumentationFile>.\Ethereum.MetaMask.Blazor.xml</DocumentationFile>
-    <PackageReadmeFile>README.md</PackageReadmeFile>
-    <Description>Interop library for simplifying MetaMask's API for Blazor WebAssembly and Server apps.</Description>
-    <Version>1.2.1</Version>
-    <PackageTags>Metamask;Ethereum</PackageTags>
+	<Title>Ethereum MetaMask API</Title>
+    <Description>Interop library for simplifying MetaMask's API for the Blazor WebAssembly and Server-Side applications.</Description>
+	<PackageProjectUrl>https://github.com/suxrobGM/metamask-blazor</PackageProjectUrl>
+	<RepositoryUrl>https://github.com/suxrobGM/metamask-blazor</RepositoryUrl>
+	<RepositoryType>GIT</RepositoryType>
+	<PackageLicenseFile>LICENSE</PackageLicenseFile>
+	<PackageReadmeFile>README.md</PackageReadmeFile>
+    <PackageTags>Metamask; Ethereum; Blazor; WebAssembly;</PackageTags>
     <GeneratePackageOnBuild>False</GeneratePackageOnBuild>
     <Copyright>Copyright Sukhrob Ilyosbekov</Copyright>
     <Authors>Sukhrob Ilyosbekov</Authors>
     <LangVersion>10</LangVersion>
-    <Nullable>disable</Nullable>
+    <Nullable>enable</Nullable>
   </PropertyGroup>
 
   <ItemGroup>
@@ -21,6 +26,13 @@
       <Pack>True</Pack>
       <PackagePath></PackagePath>
     </None>
+  </ItemGroup>
+
+  <ItemGroup>
+	<None Include="..\..\LICENSE">
+	  <Pack>True</Pack>
+	  <PackagePath></PackagePath>
+	</None>
   </ItemGroup>
 
   <ItemGroup>
