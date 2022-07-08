@@ -1,3 +1,6 @@
+[![BuildShield](https://github.com/suxrobGM/metamask-blazor/blob/main/.github/workflows/dotnet.yml/badge.svg)](https://github.com/suxrobGM/metamask-blazor/blob/main/.github/workflows/dotnet.yml)
+[![NuGetShield]][NuGetPackage]
+
 # Ethereum.MetaMask.Blazor
 Interop library for simplifying MetaMask's API for Blazor WebAssembly and Server-Side applications.
 
@@ -44,3 +47,6 @@ Do not call interop methods in `OnInitialized` when using Blazor server pre-rend
 
 ## Samples
 Check out sample blazor wasm and server applications [here](https://github.com/suxrobGM/metamask-blazor/tree/master/samples)
+
+[NuGetPackage]: https://www.nuget.org/packages/Ethereum.MetaMask.Blazor
+[NuGetShield]: https://img.shields.io/nuget/vpre/Ethereum.MetaMask.Blazor.svg
