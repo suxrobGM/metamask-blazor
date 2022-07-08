@@ -1,4 +1,4 @@
-[![BuildShield](https://github.com/suxrobGM/metamask-blazor/blob/main/.github/workflows/dotnet.yml/badge.svg)](https://github.com/suxrobGM/metamask-blazor/blob/main/.github/workflows/dotnet.yml)
+[![BuildShield](https://github.com/suxrobGM/metamask-blazor/actions/workflows/dotnet.yml/badge.svg)](https://github.com/suxrobGM/metamask-blazor/blob/main/.github/workflows/dotnet.yml)
 [![NuGetShield]][NuGetPackage]
 
 # Ethereum.MetaMask.Blazor
